@@ -14,7 +14,7 @@ RUN chmod 600 /root/.ssh/id_rsa && \
 WORKDIR /opt
 
 #RUN git clone https://github.com/ldziedziul/timeoff-management.git timeoff-management
-RUN git clone git@gitlab.example.com/timeoff.git timeoff-management
+RUN git clone git@gitlab.example.com:timeoff.git timeoff-management
 
 WORKDIR /opt/timeoff-management
 RUN npm install
