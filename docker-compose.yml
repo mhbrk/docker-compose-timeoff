@@ -20,7 +20,7 @@ services:
       #- SMTP_USER=timeoff
       #- SMTP_PASSWORD=your_email_password
       #- MYSQL_USER=timeoff
-      #- MYSQL_PASSWORD=YqNfc0CAZ3
+      #- MYSQL_PASSWORD=password
       #- MYSQL_DATABASE=timeoff
       #- MYSQL_HOST=db
       
