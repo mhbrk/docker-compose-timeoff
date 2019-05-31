@@ -1,0 +1,54 @@
+version: '3.4'
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    container_name: "timeoff_app"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./data/config:/opt/timeoff-management/config
+      - ./data/db:/opt/timeoff-management/db
+    environment:
+      # set this to false to disable public account creation (set it once you have created your company to disable public regitration)
+      - ALLOW_ACCOUNTS_CREATION=true
+      - APP_URL=https://timeoff.example.com
+      - NODE_ENV=production
+      #- SENDER_MAIL=timeoff@example.com
+      #- SMTP_HOST=example.com
+      #- SMTP_PORT=25
+      #- SMTP_USER=timeoff
+      #- SMTP_PASSWORD=your_email_password
+      #- MYSQL_USER=timeoff
+      #- MYSQL_PASSWORD=YqNfc0CAZ3
+      #- MYSQL_DATABASE=timeoff
+      #- MYSQL_HOST=db
+      
+  sqliteweb:
+    image: tomdesinto/sqliteweb
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+     - ./data/db/db.production.sqlite:/db/db.production.sqlite
+    command: db.production.sqlite
+    
+  #db:
+  #  image: mysql:5.7
+  #  restart: always
+  #  container_name: "timeoff_db"
+  #  environment:
+  #    MYSQL_DATABASE: 'timeoff'
+  #    MYSQL_USER: 'timeoff'
+  #    MYSQL_PASSWORD: 'password'
+  #    MYSQL_ROOT_PASSWORD: 'root-password'
+  #  volumes:
+  #    - ./data/mysql:/var/lib/mysql
+      
+  #pma:
+  #  image: phpmyadmin/phpmyadmin
+  #  ports:
+  #    - '127.0.0.1:8765:80'
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: CF59WOsKmR
+  #  depends_on:
+  #    - db
